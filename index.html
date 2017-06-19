@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Furigana Test</title>
+  <style type="text/css" media="screen">
+    body {
+      margin: 40px auto;
+      max-width: 650px;
+      line-height: 1.6;
+      font-size: 1.4em;
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      padding: 0 10px;
+    }
+
+    ul {
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+  <ul id="messages">
+    <li><ruby>願<rp>(</rp><rt>ねが</rt><rp>)</rp></ruby>い</li>
+  </ul>
+  <form id="form-message" action="">
+    <input id="m" type="text" name="kanji-input" autocomplete="off"><button>Convert</button>
+  </form>
+  <form id="form-translate" action="">
+    <input id="t" type="text" name="translate-input" autocomplete="off"><button>Translate</button>
+  </form>
+  <p id="translated"></p>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    $(function() {
+      var socket = io();
+      $('#form-message').submit(function(event) {
+        // console.log(event);
+        socket.emit('kanji-input', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      $('#form-translate').submit(function(event) {
+        // console.log(event);
+        socket.emit('translate-input', $('#t').val());
+        $('#t').val('');
+        return false;
+      });
+
+      socket.on('kanji-output', function(message) {
+        $('#messages').append('<li>' + message + '</li>');
+      });
+
+      socket.on('translate-output', function(message) {
+        $('#translated').text(message);
+      });
+    });
+  </script>
+</body>
+</html>
