@@ -1,0 +1,12 @@
+## Jun 20
+
+Did early work on this. The first step was to convert normal kanji to ruby notation with kuroshiro package to allow for easier reading of them, since the furigana assistance is critical in making sense of what's what for most people (or is it only for beginners?). But since ruby notation is only viewable in browser since it makes use of the browser implementation to display it, it has quite a messy format. The next is to find ways to provide rough translation per word submitted. I think of using Jisho's API to accomplish this, but it kept returning me unrelated things (check http://imgur.com/a/ji39W) and the other japaneasy package I used also did the same thing (it was built by this professor from Monash as a EMDict project, but it's actually a wrapper for the site API). I suspect this has to do with the way the url is encoded. Posted the question in Jisho's forum.
+
+## Jun 21
+
+@cyberronin replied and suggested trying the urlencode package and that he showcased that he faced no problem on his own discord bot accessing Jisho's API. Tested the url encoded version of the characters I wanted to translate and it worked!
+
+
+## Jun 22
+
+Tested encodeurl package, it worked great! But now I only wrap the words I wanted to translate. Also I used the index check to return the first word. Might not be optimal for now, but it works. Update: created different function to get the first result out. And now translate result persist after changing the format of the container from paragraph to list.
