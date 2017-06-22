@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "encodeurl": "^1.0.1",
     "express": "^4.15.3",
     "japaneasy": "^0.2.2",
     "kuroshiro": "^0.1.5",
