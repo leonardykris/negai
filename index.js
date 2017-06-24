@@ -1,11 +1,13 @@
 var kuroshiro = require("kuroshiro");
-var app = require("express")();
+var express = require("express");
+var app = express();
 var http = require("http");
 var server = http.createServer(app);
 var request = require("request");
 var io = require('socket.io')(server);
 var encodeUrl = require('encodeurl');
 var songs = require('./songs');
+var path = require("path");
 
 // var Dictionary = require("japaneasy");
 // var dict = new Dictionary({
@@ -24,8 +26,10 @@ kuroshiro.init();
 //   console.log(result);
 // });
 
+app.use(express.static(path.join(__dirname, "/public")));
+
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile("index");
 
   // kuroshiro.init(function (error) {
   //   var result = kuroshiro.convert('願い', {mode: "furigana"});
