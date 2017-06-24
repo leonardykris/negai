@@ -2,63 +2,10 @@
 <html>
 <head>
   <title>Furigana Test</title>
-  <!-- <script type="text/javascript" src="./database.js"></script> -->
-  <style type="text/css" media="screen">
-    body {
-      margin: 40px auto;
-      max-width: 650px;
-      line-height: 1.6;
-      font-size: 1.4em;
-      font-family: Helvetica, Arial, sans-serif;
-      color: #333;
-      padding: 0 10px;
-    }
-
-    ul {
-      list-style: none;
-      -webkit-padding-start: 0px;
-      -webkit-padding-after: 0px;
-    }
-
-    .block {
-      display: block;
-    }
-
-    .hide {
-      display: none;
-    }
-
-    textarea {
-      font-size: 1em;
-      width: 100%;
-      border: none;
-      padding: 0;
-      /*height: 400px;*/
-      line-height: 1.75;
-      margin-top: 1em;
-      margin-bottom: 1em;
-    }
-
-    textarea:focus {
-      outline-offset: 0px;
-    }
-
-    textarea, :focus {
-      outline: none;
-    }
-
-    #kanji-input {
-      background-color: #eee;
-    }
-
-    .small {
-      font-size: 0.6em;
-    }
-  </style>
+  <style type="text/css" media="screen" src="./style.css"></style>
 </head>
 <body>
   <ruby>願<rp>(</rp><rt>ねが</rt><rp>)</rp></ruby>い
-  <!-- <ul id="messages"></ul> -->
   <div id="result" class="hide">
     <ul id="messages"></ul>
   </div>
@@ -69,12 +16,9 @@
     <button id="convert-btn" class="btn">Convert</button>
     <button id="edit-btn" class="btn hide">Edit</button>
   </div>
-
-
   <form id="form-translate" class="hide" action="">
     <input id="t" type="text" name="translate-input" autocomplete="off"><button class="btn">Translate</button>
   </form>
-
   <div class="small">
     <p>Autofill</p>
     <ul>
@@ -84,87 +28,13 @@
     </ul>
   </div>
 
-
-
-
-
   <!-- <p id="translated"></p> -->
   <ul id="translated">
   </ul>
 
-
-  <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-  <script>
-    $(function() {
-      var socket = io();
-      $('#convert-form').on("change keyup keydown paste cut", "textarea", function() {
-        $(this).height(0).height(this.scrollHeight);
-      }).find('textarea').change();
-
-      $('.songs').click(function(event){
-        // $('#kanji-input').val(songs.bnha-ed-1.lyrics);
-        socket.emit('song-selection', $(this).attr("id"));
-        return false;
-      });
-
-      $('#convert-btn').click(function(event) {
-        // Convert-btn should only be visible in edit mode
-        // Clicking means leaving edit mode, going to view mode
-
-        // Empty previous result
-        $('#messages').html("");
-
-        // Send event
-        socket.emit('kanji-input', $('#kanji-input').val());
-
-        $('#convert-form').addClass("hide");
-        $('#result').removeClass("hide");
-
-        // Manage buttons visibility
-        $('#convert-btn').addClass("hide");
-        $('#edit-btn').removeClass("hide");
-
-        return false;
-      });
-
-      $('#edit-btn').click(function(event) {
-        // Edit-btn should only be visible in view mode
-        // Clicking means leaving view mode, going to edit mode
-
-        // result should not be emptied yet if user decide to cancel
-        $('#result').addClass("hide");
-
-        $('#convert-form').removeClass("hide");
-
-        // Manage buttons visibility
-        $('#convert-btn').removeClass("hide");
-        $('#edit-btn').addClass("hide");
-      });
-
-      $('#form-translate').submit(function(event) {
-        // console.log(event);
-        socket.emit('translate-input', $('#t').val());
-        $('#t').val('');
-        return false;
-      });
-
-      socket.on('kanji-output', function(message) {
-        message.forEach(function(element, index) {
-          $('#messages').append('<li>' + element + '</li>');
-        });
-      });
-
-      socket.on('translate-output', function(message) {
-        // $('#translated').text(message);
-        $('#translated').append('<li>' + message + '</li>');
-      });
-
-      socket.on('lyric-output', function(lyric) {
-        $('#kanji-input').val(lyric);
-        $('#kanji-input').height($('#kanji-input')[0].scrollHeight);
-      })
-    });
-  </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+  <script type="text/javascript" src="./connection.js"></script>
 </body>
 </html>

@@ -1,0 +1,50 @@
+body {
+  margin: 40px auto;
+  max-width: 650px;
+  line-height: 1.6;
+  font-size: 1.4em;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #333;
+  padding: 0 10px;
+}
+
+ul {
+  list-style: none;
+  -webkit-padding-start: 0px;
+  -webkit-padding-after: 0px;
+}
+
+.block {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+textarea {
+  font-size: 1em;
+  width: 100%;
+  border: none;
+  padding: 0;
+  /*height: 400px;*/
+  line-height: 1.75;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+textarea:focus {
+  outline-offset: 0px;
+}
+
+textarea, :focus {
+  outline: none;
+}
+
+#kanji-input {
+  background-color: #eee;
+}
+
+.small {
+  font-size: 0.6em;
+}

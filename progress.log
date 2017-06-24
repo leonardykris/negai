@@ -29,3 +29,10 @@ After matching the result-edit styles, I realized that it became hard to identif
 
 Added some autofill options for known songs. Need another resizing effort on textarea. Currently song list is pulled from songs.js.
 
+
+## Jun 25
+
+To use a module in another one, you need to require.
+But one has to be function if it's not initialized yet.
+
+Looks like for the colouring thing, only span will work.

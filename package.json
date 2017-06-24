@@ -5,10 +5,11 @@
     "node": "8.1.2"
   },
   "description": "",
-  "main": "index.js",
+  "main": "./bin/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node ./bin/server.js",
+    "dev": "nodemon -e js,html --ignore *.log"
   },
   "author": "",
   "license": "ISC",

@@ -9,3 +9,20 @@
   [x] Find a package that can help: japaneasy (EMDict)
   [x] Find a service that can help: Jisho
   [x] Fix URL encoding
+
+This layout above is too hard to edit, really
+
+## Jun 24
+
+Next stuff I want to do are:
+1. Count the amount of unique kanjis
+2. Divide them to their difficulty level (N1-N5)
+3. Store an array of them in the song database
+4. Do analysis of which kanji is the most common out of a number of songs.
+
+Because basically, If a single kanji exists in 10 songs, you better learn that shit. Because it's more cost efficient. While if this single kanji only appears 1 out of 100 you better don't put too much time to it.
+
+- Hiragana/Katakana chart that is searchable
+  - When you click on one of them then the entire lyrics result lit up, as in, the character that has it.
+    - So like if you click on か, then all the か instances in the lyrics show up in one color.
+    - Should it be background or text color though?
