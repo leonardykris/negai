@@ -1,20 +1,22 @@
 @media only screen and (max-device-width : 720px) {
   body {
-    padding: 0 40px;
+    padding: 0 20px;
+    margin: 20px auto;
+    font-size: 1em;
   }
 }
 
 @media only screen and (min-device-width: 768px) {
   body {
     max-width: 650px;
+    margin: 40px auto;
     padding: 0 10px;
+    font-size: 1.4em;
   }
 }
 
 body {
-  margin: 40px auto;
   line-height: 1.6;
-  font-size: 1.4em;
   font-family: Helvetica, Arial, sans-serif;
   color: #333;
 }
