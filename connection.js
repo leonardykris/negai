@@ -12,7 +12,7 @@ module.exports = function(io) {
       var song = songs[id];
       // console.log(lyric);
 
-      io.emit('song-output', song);
+      socket.emit('song-output', song);
     });
 
     socket.on('kanji-input', function(message){
@@ -29,19 +29,19 @@ module.exports = function(io) {
           lines = element.split("\n");
 
           lines.forEach(function(slice, index) {
-            // io.emit('kanji-output', kuroshiro.convert(slice, {mode: "furigana"}));
+            // socket.emit('kanji-output', kuroshiro.convert(slice, {mode: "furigana"}));
             result.push(kuroshiro.convert(slice, {mode: "furigana"}));
           });
 
-          // io.emit('kanji-output', "&nbsp;");
+          // socket.emit('kanji-output', "&nbsp;");
           result.push("&nbsp");
         });
         // console.log(result);
-        io.emit('kanji-output', result);
+        socket.emit('kanji-output', result);
 
       } else {
         var transformed = kuroshiro.convert(message, {mode: "furigana"});
-        io.emit('kanji-output', transformed);
+        socket.emit('kanji-output', transformed);
       }
     });
 
@@ -52,7 +52,7 @@ module.exports = function(io) {
       // var translated = dict(message).then(function(result) {
       //   console.log(result);
       // });
-      // io.emit('translate-output', translated);
+      // socket.emit('translate-output', translated);
       var list = function(result) {
         result.forEach(function(record, index) {
           var japanese = record.japanese[0].word;
@@ -70,7 +70,7 @@ module.exports = function(io) {
         var senses = result[0].senses[0].english_definitions[0];
         var formatted = japanese + " (" + reading + ") " + ": " + senses;
 
-        io.emit('translate-output', formatted);
+        socket.emit('translate-output', formatted);
       }
 
       var word = message;
