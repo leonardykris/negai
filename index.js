@@ -8,6 +8,8 @@ var io = require('socket.io')(server);
 var encodeUrl = require('encodeurl');
 var songs = require('./songs');
 var path = require("path");
+var port = process.env.PORT || 3000;
+var router = express.Router();
 
 // var Dictionary = require("japaneasy");
 // var dict = new Dictionary({
@@ -26,9 +28,9 @@ kuroshiro.init();
 //   console.log(result);
 // });
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
   res.sendFile("index");
 
   // kuroshiro.init(function (error) {
@@ -134,6 +136,6 @@ io.on('connection', function(socket){
   })
 });
 
-server.listen(3000, function() {
-  console.log('Listening on port: 3000');
+server.listen(port, function() {
+  console.log('Listening on port: ', port);
 });
