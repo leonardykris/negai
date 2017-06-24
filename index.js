@@ -38,39 +38,31 @@ io.on('connection', function(socket){
   socket.on('kanji-input', function(message){
     // console.log('input: ' + message);
     var limit = 16;
-    var placeholder = "";
+    // var placeholder = "";
+    var result = [];
 
     // Lengthy input
     if (message.length > limit) {
-      // var test = "向かい風ばかり なんで自分だけ 綺麗ごとが 嫌いだった";
-      // chunks = message.split(" ");
-      paragraphs = message.split("  ");
+      paragraphs = message.split("\n\n");
 
       paragraphs.forEach(function(element, index) {
-        chunks = element.split(" ");
+        lines = element.split("\n");
 
-        chunks.forEach(function(slice, index) {
-          slice = placeholder + "  " + slice;
-          if (slice.length < limit) {
-            placeholder = slice;
-          } else {
-            io.emit('kanji-output', kuroshiro.convert(slice, {mode: "furigana"}));
-            placeholder = "";
-          }
+        lines.forEach(function(slice, index) {
+          // io.emit('kanji-output', kuroshiro.convert(slice, {mode: "furigana"}));
+          result.push(kuroshiro.convert(slice, {mode: "furigana"}));
         });
 
-        if (placeholder !== "") {
-          io.emit('kanji-output', kuroshiro.convert(placeholder, {mode: "furigana"}));
-          placeholder = "";
-        }
-
-        io.emit('kanji-output', "&nbsp;");
+        // io.emit('kanji-output', "&nbsp;");
+        result.push("&nbsp");
       });
+      // console.log(result);
+      io.emit('kanji-output', result);
 
-
+    } else {
+      var transformed = kuroshiro.convert(message, {mode: "furigana"});
+      io.emit('kanji-output', transformed);
     }
-    // var transformed = kuroshiro.convert(message, {mode: "furigana"});
-    // io.emit('kanji-output', transformed);
   });
 
   socket.on('translate-input', function(message){

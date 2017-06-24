@@ -1,0 +1,11 @@
+## Todo
+
+[-] Kanji to furigana conversion
+  [x] Find a package that can help: kuroshiro (wanakana)
+  [x] Sentence splicing
+  [x] Sentence length per line limit
+  [x] Paragraph slicing
+[-] On-demand translation from kanji to English
+  [x] Find a package that can help: japaneasy (EMDict)
+  [x] Find a service that can help: Jisho
+  [x] Fix URL encoding

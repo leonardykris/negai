@@ -16,18 +16,58 @@
     ul {
       list-style: none;
       -webkit-padding-start: 0px;
+      -webkit-padding-after: 0px;
+    }
+
+    .block {
+      display: block;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    textarea {
+      font-size: 1em;
+      width: 100%;
+      border: none;
+      padding: 0;
+      /*height: 400px;*/
+      line-height: 1.75;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    textarea:focus {
+      outline-offset: 0px;
+    }
+
+    textarea, :focus {
+      outline: none;
+    }
+
+    #kanji-input {
+      background-color: #eee;
     }
   </style>
 </head>
 <body>
-  <ul id="messages">
-    <li><ruby>願<rp>(</rp><rt>ねが</rt><rp>)</rp></ruby>い</li>
-  </ul>
-  <form id="form-message" action="">
-    <input id="m" type="text" name="kanji-input" autocomplete="off"><button>Convert</button>
+  <ruby>願<rp>(</rp><rt>ねが</rt><rp>)</rp></ruby>い
+  <!-- <ul id="messages"></ul> -->
+  <div id="result" class="hide">
+    <ul id="messages"></ul>
+  </div>
+  <form id="convert-form" action="">
+    <textarea id="kanji-input" type="text" name="kanji-input" autocomplete="off" rows=4 placeholder="Enter your text here"></textarea>
   </form>
-  <form id="form-translate" action="">
-    <input id="t" type="text" name="translate-input" autocomplete="off"><button>Translate</button>
+  <div class="block">
+    <button id="convert-btn" class="btn">Convert</button>
+    <button id="edit-btn" class="btn hide">Edit</button>
+  </div>
+
+
+  <form id="form-translate" class="hide" action="">
+    <input id="t" type="text" name="translate-input" autocomplete="off"><button class="btn">Translate</button>
   </form>
   <!-- <p id="translated"></p> -->
   <ul id="translated">
@@ -37,11 +77,42 @@
   <script>
     $(function() {
       var socket = io();
-      $('#form-message').submit(function(event) {
-        // console.log(event);
-        socket.emit('kanji-input', $('#m').val());
-        $('#m').val('');
+      $('#convert-form').on("change keyup keydown paste cut", "textarea", function() {
+        $(this).height(0).height(this.scrollHeight);
+      }).find('textarea').change();
+
+      $('#convert-btn').click(function(event) {
+        // Convert-btn should only be visible in edit mode
+        // Clicking means leaving edit mode, going to view mode
+
+        // Empty previous result
+        $('#messages').html("");
+
+        // Send event
+        socket.emit('kanji-input', $('#kanji-input').val());
+
+        $('#convert-form').addClass("hide");
+        $('#result').removeClass("hide");
+
+        // Manage buttons visibility
+        $('#convert-btn').addClass("hide");
+        $('#edit-btn').removeClass("hide");
+
         return false;
+      });
+
+      $('#edit-btn').click(function(event) {
+        // Edit-btn should only be visible in view mode
+        // Clicking means leaving view mode, going to edit mode
+
+        // result should not be emptied yet if user decide to cancel
+        $('#result').addClass("hide");
+
+        $('#convert-form').removeClass("hide");
+
+        // Manage buttons visibility
+        $('#convert-btn').removeClass("hide");
+        $('#edit-btn').addClass("hide");
       });
 
       $('#form-translate').submit(function(event) {
@@ -52,7 +123,9 @@
       });
 
       socket.on('kanji-output', function(message) {
-        $('#messages').append('<li>' + message + '</li>');
+        message.forEach(function(element, index) {
+          $('#messages').append('<li>' + element + '</li>');
+        });
       });
 
       socket.on('translate-output', function(message) {

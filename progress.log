@@ -10,3 +10,19 @@ Did early work on this. The first step was to convert normal kanji to ruby notat
 ## Jun 22
 
 Tested encodeurl package, it worked great! But now I only wrap the words I wanted to translate. Also I used the index check to return the first word. Might not be optimal for now, but it works. Update: created different function to get the first result out. And now translate result persist after changing the format of the container from paragraph to list.
+
+## Jun 23
+
+I just realized this, but why didn't I use a textarea for the input instead? Like, it's a known fact that you can separate lines by splitting the "\n" character.
+
+## Jun 24
+
+Tested the textarea method and it was a success. I can cut that whole checking code now for normal text input. Now, what I want to do is to mimic Medium's WYSIWYG format. So the textarea totally resembles the output. To do this, I have to remove all the existing styles for it (border, cursor effect, padding) and adjust the fonts to match the ones used in the list item. Then, just like Medium, I want it that user will be able to switch between editing mode and viewing mode easily. So far, I directly empty the textarea but now I should retain the content, but hide the element. So now instead of only "convert" buttons, I'd also need "Edit" button. This way I need to separate the button from within the form to outside and give them their own div and put it on display block. Also, I need to find how to adjust the textarea height automatically as the texts are being pasted in.
+
+Now that I think of it, textarea automatically retains history if you just edit them. So I possibly didn't need li anymore? I think I might make two modes, list mode and paragraph mode.
+
+Oh also, now I have multiple socket delivery from server once the input lines were split, I want to reduce it only one since it's kinda annoying to send things over and over again, and in case it wasn't delivered, the order might get chaotic. So I will push the results over to an array and just send that array within a single request, and have the client parse them.
+
+Tested the ul -> p change. Not workable because from that array, it does not seem to recognize the spacing. Now that I think of it, since this will be most exclusive for lyrics (although we can use it for general purpose too), and those lyrics are often separated by lines anyway, li approach is far easier to implement. Plus we can then select a single line each. As in, it's not possible to do that on a part of paragraph I think.
+
+After matching the result-edit styles, I realized that it became hard to identify which one is the edit more, so now I added background color to the editing part.
