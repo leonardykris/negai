@@ -26,3 +26,6 @@ Oh also, now I have multiple socket delivery from server once the input lines we
 Tested the ul -> p change. Not workable because from that array, it does not seem to recognize the spacing. Now that I think of it, since this will be most exclusive for lyrics (although we can use it for general purpose too), and those lyrics are often separated by lines anyway, li approach is far easier to implement. Plus we can then select a single line each. As in, it's not possible to do that on a part of paragraph I think.
 
 After matching the result-edit styles, I realized that it became hard to identify which one is the edit more, so now I added background color to the editing part.
+
+Added some autofill options for known songs. Need another resizing effort on textarea. Currently song list is pulled from songs.js.
+
