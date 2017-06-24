@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "encodeurl": "^1.0.1",
     "express": "^4.15.3",
-    "japaneasy": "^0.2.2",
     "kuroshiro": "^0.1.5",
     "request": "^2.81.0",
     "socket.io": "^2.0.3"
