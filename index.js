@@ -5,6 +5,8 @@ var server = http.createServer(app);
 var request = require("request");
 var io = require('socket.io')(server);
 var encodeUrl = require('encodeurl');
+var songs = require('./songs');
+
 // var Dictionary = require("japaneasy");
 // var dict = new Dictionary({
 //   dictionary: "auto",
@@ -34,6 +36,13 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket){
   console.log('somebody is connected!');
+
+  socket.on('song-selection', function(id) {
+    var lyric = songs[id].lyric;
+    console.log(lyric);
+
+    io.emit('lyric-output', lyric);
+  });
 
   socket.on('kanji-input', function(message){
     // console.log('input: ' + message);
