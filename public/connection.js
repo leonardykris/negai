@@ -18,13 +18,6 @@ $(function() {
     // Send event
     socket.emit('kanji-input', $('#kanji-input').val());
 
-    $('#convert-form').addClass("hide");
-    $('#result').removeClass("hide");
-
-    // Manage buttons visibility
-    $('#convert-btn').addClass("hide");
-    $('#edit-btn').removeClass("hide");
-
     return false;
   });
 
@@ -41,6 +34,13 @@ $(function() {
     message.forEach(function(element, index) {
       $('#messages').append('<li>' + element + '</li>');
     });
+
+    $('#convert-form').addClass("hide");
+    $('#result').removeClass("hide");
+
+    // Manage buttons visibility
+    $('#convert-btn').addClass("hide");
+    $('#edit-btn').removeClass("hide");
   });
 
   socket.on('translate-output', function(message) {
