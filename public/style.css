@@ -48,3 +48,33 @@ textarea, :focus {
 .small {
   font-size: 0.6em;
 }
+
+.nav {
+  -webkit-margin-before: 0px;
+}
+
+.nav li {
+  list-style-type: none;
+  display: inline;
+}
+
+.nav li + li {
+  padding-left: 20px;
+}
+
+.nav li a {
+  text-decoration: none;
+  color: #999;
+}
+
+.nav li a.logo {
+  color:
+}
+
+.nav li a:hover {
+  text-decoration: underline;
+}
+
+.top {
+  border-bottom: 1px solid #ccc;
+}

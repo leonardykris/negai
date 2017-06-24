@@ -9,10 +9,10 @@ module.exports = function(io) {
     kuroshiro.init();
 
     socket.on('song-selection', function(id) {
-      var lyric = songs[id].lyric;
-      console.log(lyric);
+      var song = songs[id];
+      // console.log(lyric);
 
-      io.emit('lyric-output', lyric);
+      io.emit('song-output', song);
     });
 
     socket.on('kanji-input', function(message){

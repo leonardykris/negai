@@ -36,6 +36,7 @@ $(function() {
     });
 
     $('#convert-form').addClass("hide");
+    $('#autofill').addClass("hide");
     $('#result').removeClass("hide");
 
     // Manage buttons visibility
@@ -48,8 +49,10 @@ $(function() {
     $('#translated').append('<li>' + message + '</li>');
   });
 
-  socket.on('lyric-output', function(lyric) {
-    $('#kanji-input').val(lyric);
+  socket.on('song-output', function(song) {
+    var header = song.series + " - " + song.name + "\n\n";
+
+    $('#kanji-input').val(header + song.lyrics);
     $('#kanji-input').height($('#kanji-input')[0].scrollHeight);
   });
 })

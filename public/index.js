@@ -11,6 +11,7 @@ $(function() {
     $('#result').addClass("hide");
 
     $('#convert-form').removeClass("hide");
+    $('#autofill').removeClass("hide");
 
     // Manage buttons visibility
     $('#convert-btn').removeClass("hide");
